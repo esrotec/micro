@@ -1,0 +1,44 @@
+.model small
+.stack 100h
+.data
+a db 'dding With Loop $'
+b db ?
+.code
+
+main proc   
+    mov ax, @data
+    mov ds, ax
+    
+    ;string print
+    mov ah, 9
+    lea dx, a 
+    
+    mov ah, 2
+    mov dl, 10
+    int 21h
+    mov dl, 13
+    int 21h
+                 
+    mov cx, 3 
+    mov ah, 2 
+    
+    
+    adding: 
+    mov ah, 1
+    int 21h
+    mov bl, al
+    add b, bl
+    sub b, 48 
+           
+    loop adding  
+    
+    mov ah, 2 
+    add b, 48
+    mov dl, b
+    int 21h           
+    
+    exit:
+    mov ah, 4ch
+    int 21h    
+    main endp
+end main
